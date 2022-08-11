@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "110911430007",
+    "project_id": "insta-chat-b34e8",
+    "storage_bucket": "insta-chat-b34e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110911430007:android:2c7b4d92faf9867cb51572",
+        "android_client_info": {
+          "package_name": "com.PreyalAmeta.insta_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110911430007-bbik4te2mlvlq9ck0g62d822tm4e6h07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO4FgF_xrm7-tqAdYEknQsiLNUVLdpdlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110911430007-bbik4te2mlvlq9ck0g62d822tm4e6h07.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
