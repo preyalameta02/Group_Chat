@@ -4,7 +4,7 @@ import 'package:insta_chat/screens/registration_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:insta_chat/components/rounded_button.dart';
 import 'package:insta_chat/constants.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
   @override
@@ -20,11 +20,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 2),
     );
     // animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
 
-    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
+    animation = ColorTween(begin: Colors.redAccent.shade100, end: Colors.white70)
         .animate(controller);
     controller.forward();
     // animation.addStatusListener((status) {
@@ -59,24 +59,36 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Center(
+              child: Hero(
+                tag: 'logo',
+                child: Container(
+                  child: Image.asset('images/logo.png'),
+                  height: 60,
+                ),
+              ),
+            ),
+            SizedBox(height: 40,),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    child: Image.asset('images/logo.png'),
-                    height: 60,
-                  ),
-                ),
-                TypewriterAnimatedTextKit(
-                  text: ['Insta Chat'],
-                  speed: Duration(milliseconds: 250),
+                // TypewriterAnimatedTextKit(
+                //   text: ['Insta Chat'],
+                //   speed: Duration(milliseconds: 250),
+                //   textStyle: TextStyle(
+                //     fontSize: 45.0,
+                //     fontWeight: FontWeight.w900,
+                //     color: Colors.grey.shade600,
+                //   ),
+                // ),
+                Text('INSTA CHAT',
+                style: GoogleFonts.raleway(
                   textStyle: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.grey.shade600,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                      fontSize: 40
                   ),
-                ),
+                )),
               ],
             ),
             SizedBox(
@@ -91,7 +103,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             ),
             RoundedButton(
               title: 'Register',
-              colour: kColorPalette,
+              colour: Color(0xFFff4d4d),
               onPressed: () {
                 Navigator.pushNamed(context, RegistrationScreen.id);
               },

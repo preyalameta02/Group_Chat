@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:insta_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:insta_chat/screens/welcome_screen.dart';
 final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
 class ChatScreen extends StatefulWidget {
@@ -46,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
               icon: Icon(Icons.close),
               onPressed: () {
                 _auth.signOut();
-                Navigator.pop(context);
+                Navigator.pushNamed(context, WelcomeScreen.id);
               }),
         ],
         title: Text('⚡️Chat'),
@@ -74,16 +75,19 @@ class _ChatScreenState extends State<ChatScreen> {
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
-                  FlatButton(
+                  ElevatedButton(
+
                     onPressed: () {
                       messageTextController.clear();
                       _firestore.collection('messages').add({
                         'sender': loggedInUser.email,
                         'text': messageText,
+                        'Timestamp': FieldValue.serverTimestamp(),
                       });
                     },
                     child: Text(
                       'Send',
+
                       style: kSendButtonTextStyle,
                     ),
                   ),
@@ -103,7 +107,7 @@ class MessagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection('messages').snapshots(),
+      stream: _firestore.collection('messages').orderBy('Timestamp').snapshots(),
       builder: (BuildContext context,
           AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {
@@ -120,9 +124,6 @@ class MessagesStream extends StatelessWidget {
           final messageText = data['text'];
           final messageSender = data['sender'];
           final currentUser = loggedInUser.email;
-          if(currentUser == messageSender){
-            //it is me
-          }
           final messageBubble = MessageBubble(sender: messageSender, text: messageText,isMe: currentUser==messageSender,);
           messageBubbles.add(messageBubble);
         }
